@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovilLap - Tecnología y Reparación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #0a0a0a;
+            --accent-color: #00ff9d;
+            --accent-glow: rgba(0, 255, 157, 0.5);
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --card-bg: #111111;
+            --card-border: rgba(0, 255, 157, 0.15);
+            --card-hover-border: rgba(0, 255, 157, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 157, 0.03) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.03) 0%, transparent 25%),
+                linear-gradient(0deg, #000000 0%, #0a0a0a 100%);
+        }
+
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background: 
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300ff9d' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E"),
+                linear-gradient(0deg, #000000 0%, #0a0a0a 100%);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header futurista */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0, 255, 157, 0.1);
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            padding: 0.8rem 0;
+            background-color: rgba(0, 0, 0, 0.95);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            background: linear-gradient(45deg, var(--accent-color), #00cc7d, var(--accent-color));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px var(--accent-glow);
+            animation: gradientShift 3s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            box-shadow: 0 0 8px var(--accent-glow);
+            transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section futurista */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 157, 0.1) 0%, transparent 60%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--text-color), var(--accent-color), var(--text-color));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s linear infinite;
+            text-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-color), #00cc7d);
+            color: var(--primary-color);
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 5px 15px rgba(0, 255, 157, 0.3);
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.5);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.6);
+        }
+
+        .btn-large {
+            padding: 1.4rem 3rem;
+            font-size: 1.2rem;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            font-weight: 800;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        /* Products - Diseño futurista */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .product-card {
+            background: linear-gradient(145deg, var(--card-bg), #0c0c0c);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s;
+            border: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 255, 157, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 255, 157, 0.2);
+            border-color: var(--card-hover-border);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-image {
+            height: 380px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, var(--card-bg), transparent);
+            z-index: 1;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .product-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .product-price::before {
+            content: '$';
+            font-size: 1.5rem;
+            margin-right: 5px;
+        }
+
+        .product-action {
+            margin-top: auto;
+        }
+
+        /* Repair Form futurista */
+        .repair {
+            background: linear-gradient(145deg, var(--card-bg), #0c0c0c);
+            border-radius: 20px;
+            padding: 5rem;
+            margin: 5rem auto;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repair::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(0, 255, 157, 0.05), transparent);
+            transform: rotate(45deg);
+            animation: shine 6s infinite linear;
+            z-index: 1;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 1px solid #2e2e2e;
+            border-radius: 8px;
+            background-color: rgb(252, 251, 251);
+            color: var(--text-color);
+            font-family: inherit;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.2);
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .full-width {
+            grid-column: 1 / span 2;
+        }
+
+        /* Mejora para el campo de subida de fotos */
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-btn {
+            border: 2px dashed var(--accent-color);
+            color: var(--text-color);
+            background-color: rgba(45, 211, 128, 0.416);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .file-upload-btn:hover {
+            background-color: rgba(0, 255, 157, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        .file-upload-btn i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .file-upload-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        /* Footer futurista */
+        footer {
+            background-color: #050505;
+            padding: 5rem 0 2rem;
+            border-top: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .footer-section p {
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: var(--accent-color);
+            width: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            color: var(--text-color);
+            transition: all 0.3s;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        .social-icons a:hover::before {
+            opacity: 0.2;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid #222;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Botones flotantes de redes sociales futuristas */
+        .floating-social {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-button {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        .social-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.2));
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .social-button:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-button:hover::after {
+            opacity: 1;
+        }
+
+        .social-button.whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-color: rgba(37, 211, 102, 0.3);
+        }
+
+        .social-button.facebook {
+            background: linear-gradient(135deg, #4267B2, #3B5998);
+            border-color: rgba(66, 103, 178, 0.3);
+        }
+
+        .social-button.instagram {
+            background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCAF45);
+            border-color: rgba(131, 58, 180, 0.3);
+        }
+
+        .social-button.tiktok {
+            background: linear-gradient(135deg, #000000, #25F4EE, #FE2C55);
+            border-color: rgba(37, 244, 238, 0.3);
+        }
+
+        .social-tooltip {
+            position: absolute;
+            right: 75px;
+            background-color: var(--card-bg);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            white-space: nowrap;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .social-button:hover .social-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 80px;
+        }
+
+        /* Efectos de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Mejoras responsive */
+        @media (max-width: 1024px) {
+            .hero-content h2 {
+                font-size: 3.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .full-width {
+                grid-column: 1;
+            }
+            
+            .hero-content h2 {
+                font-size: 3rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding: 1.5rem 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(10px);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                width: 100%;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 1.2rem 2rem;
+                border-radius: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                color: var(--text-color);
+                font-size: 1.8rem;
+                cursor: pointer;
+                z-index: 1001;
+            }
+
+            .about {
+                padding: 3rem 2rem;
+            }
+            
+            .repair {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .product-image {
+                height: 320px;
+            }
+
+            .about {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .about__content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .product-image {
+                height: 280px;
+            }
+
+            .about {
+                padding: 2rem 1rem;
+            }
+
+            .about__subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about__content {
+                font-size: 1rem;
+            }
+            
+            .repair {
+                padding: 2rem 1rem;
+            }
+            
+            .floating-social {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .social-button {
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
+            
+            .social-tooltip {
+                display: none;
+            }
+            
+            .btn {
+                padding: 1rem 2rem;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+
+        /* Efectos de scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Efecto de maquina de escribir */
+        .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid var(--accent-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-color); }
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-bg"></div>
+    <div class="particles" id="particles"></div>
+    
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Movil<span>Lap</span></h1>
+            </div>
+            <nav>
+                <ul id="menu">
+                    <li><a href="#piezas">Piezas</a></li>
+                    <li><a href="#telefonos">Teléfonos</a></li>
+                    <li><a href="#reparacion">Reparación</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="fade-in">TECNOLOGÍA <span>DEL FUTURO</span></h2>
+                <p class="fade-in delay-1">Reparación avanzada y venta de tecnología móvil con servicio premium a domicilio</p>
+                <div class="hero-buttons fade-in delay-2">
+                    <a href="#piezas" class="btn"><i class="fas fa-microchip"></i> Ver Componentes</a>
+                    <a href="#reparacion" class="btn btn-outline"><i class="fas fa-tools"></i> Solicitar Reparación</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Piezas -->
+    <section id="piezas" class="products">
+        <div class="container">
+            <h2 class="section-title">COMPONENTES PREMIUM</h2>
+            <div class="products-grid" id="parts-container">
+                <!-- Producto 1 - Pantalla Nokia G21 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="assets/img/piezas/nokiag21.jpg" alt="Pantalla Nokia G21">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pantalla Nokia G21</h3>
+                        <p>Pantalla de repuesto para Nokia G21, con garantía de 2 meses. Calidad premium con colores vibrantes y touch responsivo.</p>
+                        <div class="product-price">65.000</div>
+                        <div class="product-action">
+                            <a href="https://wa.me/573233670402?text=Hola,%20estoy%20interesado%20en%20comprar%20la%20Pantalla%20Nokia%20G21%20por%20$65.000" class="btn" target="_blank">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Producto 2 - Pantalla Motorola Moto G30 -->
+                <div class="product-card fade-in delay-1">
+                    <div class="product-image">
+                        <img src="assets/img/piezas/Motorola%20Motog%2030.jpg" alt="Pantalla Motorola Moto G30">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pantalla Motorola Moto G30</h3>
+                        <p>Pantalla genérica Moto G30, con 2 meses de garantía, calidad premium, colores vibrantes y touch responsivo.</p>
+                        <div class="product-price">65.000</div>
+                        <div class="product-action">
+                            <a href="https://wa.me/573233670402?text=Hola,%20estoy%20interesado%20en%20comprar%20la%20Pantalla%20Motorola%20Moto%20G30%20por%20$65.000" class="btn" target="_blank">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Producto 3 - Pantalla Motorola Moto G20 -->
+                <div class="product-card fade-in delay-2">
+                    <div class="product-image">
+                        <img src="assets/img/piezas/Motorola%20g20.jpg" alt="Pantalla Motorola Moto G20">
+                    </div>
+                    <div class="product-info">
+                        <h3>Pantalla Moto G20</h3>
+                        <p>Pantalla genérica Moto G20, con 2 meses de garantía, calidad premium, colores vibrantes y touch responsivo.</p>
+                        <div class="product-price">65.000</div>
+                        <div class="product-action">
+                            <a href="https://wa.me/573233670402?text=Hola,%20estoy%20interesado%20en%20comprar%20la%20Pantalla%20Moto%20G20%20por%20$65.000" class="btn" target="_blank">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Producto 4 - Batería Motorola Moto G20 -->
+                <div class="product-card fade-in delay-3">
+                    <div class="product-image">
+                        <img src="assets/img/piezas/Bateria%20Motog30.jpg" alt="Batería Motorola Moto G20">
+                    </div>
+                    <div class="product-info">
+                        <h3>Batería Moto G20</h3>
+                        <p>Batería para teléfono Moto G20, con garantía por 2 meses. Alta duración y rendimiento optimizado.</p>
+                        <div class="product-price">38.000</div>
+                        <div class="product-action">
+                            <a href="https://wa.me/573233670402?text=Hola,%20estoy%20interesado%20en%20comprar%20la%20Batería%20Moto%20G20%20por%20$38.000" class="btn" target="_blank">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Teléfonos Usados -->
+    <section id="telefonos" class="products">
+        <div class="container">
+            <h2 class="section-title">SMARTPHONES USADOS</h2>
+            <div class="products-grid" id="phones-container">
+
+
+                <!-- Teléfono 1 - Nokia G21 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="assets/fonts/ventas/Nokia%20g21.jpg" alt="Nokia G21">
+                    </div>
+                    <div class="product-info">
+                        <h3>Nokia G21</h3>
+                        <p>4 GB de RAM y 64 GB de almacenamiento interno, expandible con microSD. Batería de 5050 mAh de larga duración, hasta 3 días con uso moderado. Android 11 actualizado, fluido y con parches de seguridad.</p>
+                        <div class="product-price">120.000</div>
+                        <div class="product-action">
+                            <a href="https://wa.me/573233670402?text=Hola,%20estoy%20interesado%20en%20comprar%20el%20Nokia%20G21%20por%20$120.000" class="btn" target="_blank">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Teléfono 2 - Samsung Galaxy (ejemplo) -->
+               
+    </section>
+
+    <!-- Sección de Reparación -->
+    <section id="reparacion" class="repair">
+        <div class="container">
+            <h2 class="section-title">REPARACIÓN AVANZADA</h2>
+            <form id="repair-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name"><i class="fas fa-user"></i> Nombre completo *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Número de teléfono *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+57 300 123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="address"><i class="fas fa-map-marker-alt"></i> Dirección *</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-type"><i class="fas fa-mobile-alt"></i> Tipo de teléfono *</label>
+                        <select id="phone-type" name="phone-type" required>
+                            <option value="">Seleccione...</option>
+                            <option value="smartphone">Smartphone</option>
+                            <option value="tablet">Tablet</option>
+                            <option value="basico">Teléfono Básico</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="brand"><i class="fas fa-tag"></i> Marca *</label>
+                        <input type="text" id="brand" name="brand" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="model"><i class="fas fa-mobile"></i> Modelo *</label>
+                        <input type="text" id="model" name="model" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="problem"><i class="fas fa-exclamation-triangle"></i> Descripción del daño *</label>
+                        <textarea id="problem" name="problem" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="date"><i class="fas fa-calendar-alt"></i> Fecha para la visita *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="photos"><i class="fas fa-camera"></i> Subir fotos (máx. 2)</label>
+                        <div class="file-upload">
+                            <div class="file-upload-btn">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Haz clic o arrastra las imágenes aquí</p>
+                                <input type="file" id="photos" name="photos" accept="image/*" multiple class="file-upload-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-large"><i class="fas fa-paper-plane"></i> Solicitar Reparación</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MovilLap</h3>
+                    <p>Especialistas en tecnología móvil, reparación y venta de equipos y accesorios con calidad premium.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-phone"></i> +57 323 367 0402</p>
+                    <p><i class="fas fa-envelope"></i> info@movillap.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Principal #123, Ciudad</p>
+                </div>
+                <div class="footer-section">
+                    
+                   
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MovilLap - Tecnología del Futuro</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botones flotantes de redes sociales -->
+    <div class="floating-social">
+        <a href="https://wa.me/573233670402" target="_blank" class="social-button whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="social-tooltip">Chatear por WhatsApp</span>
+        </a>
+        <a href="https://www.facebook.com/MovilLap" target="_blank" class="social-button facebook">
+            <i class="fab fa-facebook-f"></i>
+            <span class="social-tooltip">Síguenos en Facebook</span>
+        </a>
+        <a href="https://www.instagram.com/MovilLap" target="_blank" class="social-button instagram">
+            <i class="fab fa-instagram"></i>
+            <span class="social-tooltip">Síguenos en Instagram</span>
+        </a>
+        <a href="https://www.tiktok.com/@MovilLap" target="_blank" class="social-button tiktok">
+            <i class="fab fa-tiktok"></i>
+            <span class="social-tooltip">Síguenos en TikTok</span>
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Crear partículas de fondo
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Posición aleatoria
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    particle.style.left = `${posX}vw`;
+                    particle.style.top = `${posY}vh`;
+                    
+                    // Tamaño aleatorio
+                    const size = Math.random() * 3 + 1;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Opacidad aleatoria
+                    const opacity = Math.random() * 0.5 + 0.3;
+                    particle.style.opacity = opacity;
+                    
+                    // Animación con delay aleatorio
+                    const delay = Math.random() * 15;
+                    particle.style.animationDelay = `${delay}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            createParticles();
+            
+            // Efecto de scroll en header
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+           
+            
+            // Formulario de reparación
+            const repairForm = document.getElementById('repair-form');
+            if (repairForm) {
+                repairForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const repairData = {
+                        name: formData.get('name'),
+                        phone: formData.get('phone'),
+                        address: formData.get('address'),
+                        phoneType: formData.get('phone-type'),
+                        brand: formData.get('brand'),
+                        model: formData.get('model'),
+                        problem: formData.get('problem'),
+                        date: formData.get('date')
+                    };
+                    
+                    // Crear mensaje para WhatsApp
+                    const message = `*Nueva solicitud de reparación:*%0A%0A` +
+                                    `*Nombre:* ${repairData.name}%0A` +
+                                    `*Teléfono:* ${repairData.phone}%0A` +
+                                    `*Dirección:* ${repairData.address}%0A` +
+                                    `*Tipo de teléfono:* ${repairData.phoneType}%0A` +
+                                    `*Marca:* ${repairData.brand}%0A` +
+                                    `*Modelo:* ${repairData.model}%0A` +
+                                    `*Problema:* ${repairData.problem}%0A` +
+                                    `*Fecha deseada:* ${repairData.date}`;
+                    
+                    const whatsappURL = `https://wa.me/573233670402?text=${message}`;
+                    window.open(whatsappURL, '_blank');
+                    
+                    // Limpiar formulario
+                    this.reset();
+                    alert('Solicitud enviada. Será redirigido a WhatsApp para confirmar.');
+                });
+            }
+            
+            // Animación de elementos al hacer scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.product-card, .repair, .about').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>

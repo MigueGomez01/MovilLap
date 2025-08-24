@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de QR - MovilLap</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #1a1a1a;
+            --accent-color: #00ff9d;
+            --text-color: #ffffff;
+            --text-secondary: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 157, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 20%);
+        }
+
+        .container {
+            background-color: var(--secondary-color);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 157, 0.1);
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .qr-container {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 255, 157, 0.3);
+        }
+
+        .download-btn:hover {
+            background-color: #00cc7d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 255, 157, 0.4);
+        }
+
+        .instructions {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .instructions h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .url-display {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 5px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>Movil<span>Lap</span></h1>
+        </div>
+        
+        <h2>Código QR de Acceso</h2>
+        <p>Escanea este código QR para acceder rápidamente a nuestra página web desde tu dispositivo móvil.</p>
+        
+        <div class="url-display">
+            https://movillap.com
+        </div>
+        
+        <div class="qr-container">
+            <div id="qrcode"></div>
+        </div>
+        
+        <a href="#" id="downloadLink" class="download-btn">
+            <i class="fas fa-download"></i> Descargar Código QR
+        </a>
+        
+        <div class="instructions">
+            <h3>¿Cómo utilizar el código QR?</h3>
+            <ol>
+                <li>Haz clic en "Descargar Código QR" para guardar la imagen</li>
+                <li>Imprime el código QR o compártelo digitalmente</li>
+                <li>Los clientes pueden escanearlo con la cámara de su teléfono</li>
+                <li>Serán redirigidos automáticamente a nuestra página web</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="footer">
+        &copy; 2023 MovilLap - Tecnología y Reparación
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL de la página web de MovilLap
+            const websiteUrl = 'https://movillap.com';
+            
+            // Generar el código QR
+            const qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: websiteUrl,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            
+            // Configurar la descarga del código QR
+            document.getElementById('downloadLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Obtener el canvas del código QR
+                const canvas = document.querySelector('#qrcode canvas');
+                if (!canvas) return;
+                
+                // Convertir el canvas a una imagen
+                const image = canvas.toDataURL('image/png');
+                
+                // Crear un enlace de descarga
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'movillap-qrcode.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+    </script>
+</body>
+</html>
